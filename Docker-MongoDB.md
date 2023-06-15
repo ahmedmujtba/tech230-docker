@@ -63,3 +63,36 @@ docker push ahmedmujtba/docker-mongodb
 Output:
 
 ![alt text](./assets/mongodb-push.png)
+
+# Connecting the app and mongodb
+
+1. Create a docker-compose.yml file:
+
+```
+version: '3.1'
+services:
+  app:
+    image: ahmedmujtba/tech230-docker:v1
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    environment:
+      - DB_HOST=mongodb://mongodb:27017/posts
+    command:
+      sh -c "npm install && npm start"
+  mongodb:
+    image: ahmedmujtba/docker-mongodb
+    ports:
+      - "27017:27017"
+
+
+
+```
+
+![alt text](./assets/app-listening.png)
+
+![alt text](./assets/app-working-docker.png)
+
+![alt text](./assets/posts-working-docker.png)

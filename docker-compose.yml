@@ -1,0 +1,17 @@
+version: '3.1'
+services:
+  app:
+    image: ahmedmujtba/tech230-docker:v1
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    environment:
+      - DB_HOST=mongodb://mongodb:27017/posts
+    command:
+      sh -c "npm install && npm start"
+  mongodb:
+    image: ahmedmujtba/docker-mongodb
+    ports:
+      - "27017:27017"
