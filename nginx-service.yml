@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc # naming the deployment
+  namespace: default # sre , not needed unless in production, keeps things separated
+spec:
+  ports:
+  - nodePort: 30001 # range is 30000-32768
+    port: 80
+    # port mapping
+
+    targetPort: 80
+  selector:
+    app: nginx # look for this label to match with k8 services
+  
+  type: NodePort  

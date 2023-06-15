@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeapp-deployment
+spec:
+  selector:
+    matchLabels:
+      app: sparta-app
+  replicas: 3
+
+  template:
+    metadata:
+      labels:
+        app: sparta-app
+    spec:
+      containers:
+      - name: sparta-app
+        image: ahmedmujtba/tech230-docker:v1
+        ports:
+        - containerPort: 3000
