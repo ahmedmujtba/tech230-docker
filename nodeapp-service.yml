@@ -5,7 +5,8 @@ metadata:
   namespace: default # sre , not needed unless in production, keeps things separated
 spec:
   ports:
-  - nodePort: 30005 # range is 30000-32768
+  - protocol: TCP
+    nodePort: 30005 # range is 30000-32768
     port: 3000
     # port mapping
 

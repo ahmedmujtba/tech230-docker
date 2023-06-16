@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sparta-db
+  labels:
+    db: sparta-db
+spec:
+  selector:
+    matchLabels:
+      db: sparta-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        db: sparta-db
+    spec:
+      containers:
+        - name: sparta-db
+          image: ahmedmujtba/docker-mongodb:latest
+          ports:
+          - containerPort: 27017
+          env:
+          - name: DB_HOST
+            value: sparta-db:27017/posts

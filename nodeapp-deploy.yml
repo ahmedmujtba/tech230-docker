@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nodeapp-deployment
+  labels:
+    app: sparta-app
 spec:
   selector:
     matchLabels:
@@ -18,3 +20,13 @@ spec:
         image: ahmedmujtba/tech230-docker:v1
         ports:
         - containerPort: 3000
+        env:
+        - name: DB_HOST
+          value: sparta-db-svc:27017/posts
+        command: ["sh", "-c"]
+        args:
+          - |
+            cd /app
+            npm stop --if-present
+            node seeds/seed.js
+            npm restart app.js --update-env
